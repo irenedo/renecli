@@ -33,3 +33,23 @@ export def kube-context [] {
     kubectl config use-context $context
     kube-namespace
 }
+
+# Pick an ingress host with fzf and open it in the default browser.
+export def eks-ingress [] {
+    let host = (
+        kubectl get ingress --all-namespaces --output jsonpath='{range .items[*]}{range .spec.rules[*]}{.host}{"\n"}{end}{end}'
+        | lines
+        | where {|host| not ($host | is-empty) }
+        | uniq
+        | to text
+        | fzf --prompt 'Ingress host> ' --layout reverse --height 40% --border rounded
+        | str trim
+    )
+
+    if ($host | is-empty) {
+        print 'No ingress host selected'
+        return
+    }
+
+    ^open $'https://($host)'
+}

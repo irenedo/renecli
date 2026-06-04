@@ -42,3 +42,4 @@ __renecli_awsprof() {
 alias awsprof='__renecli_awsprof'
 alias kns='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; kube-namespace"'
 alias kcon='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; kube-context"'
+alias king='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; eks-ingress"'

@@ -69,6 +69,26 @@ Dependencies:
 - `kubectl`
 - `fzf`
 
+### `eks-ingress`
+
+Lists all ingress host names in the current Kubernetes cluster through `fzf`, then opens the selected host in the default browser.
+
+```nu
+eks-ingress
+```
+
+From Bash, use the alias:
+
+```bash
+king
+```
+
+Dependencies:
+
+- `kubectl`
+- `fzf`
+- `open`
+
 ### `kube-context`
 
 Lists configured Kubernetes contexts through `fzf`, switches to the selected context, then asks you to select a namespace for that context.
