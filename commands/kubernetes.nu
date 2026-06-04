@@ -53,3 +53,24 @@ export def eks-ingress [] {
 
     ^open $'https://($host)'
 }
+
+# Pick any Kubernetes resource kind, including CRDs, and inspect it.
+export def eks-inspect [] {
+    let resource = (
+        kubectl api-resources --request-timeout 10s --verbs list --output name
+        | lines
+        | where {|resource| not ($resource | is-empty) }
+        | sort
+        | uniq
+        | to text
+        | fzf --prompt 'Kubernetes resource> ' --layout reverse --height 40% --border rounded
+        | str trim
+    )
+
+    if ($resource | is-empty) {
+        print 'No Kubernetes resource selected'
+        return
+    }
+
+    kubectl inspect $resource
+}

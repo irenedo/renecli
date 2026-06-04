@@ -68,6 +68,26 @@ Dependencies:
 
 - `kubectl`
 - `fzf`
+- `kubectl-inspect`
+
+Install `kubectl-inspect` with Go:
+
+```bash
+go install github.com/irenedo/kubectl-inspect@latest
+```
+
+Or with Krew:
+
+```bash
+kubectl krew update
+kubectl krew install inspect
+```
+
+After installation, `kubectl` discovers it automatically as:
+
+```bash
+kubectl inspect deployment
+```
 
 ### `eks-ingress`
 
@@ -88,6 +108,25 @@ Dependencies:
 - `kubectl`
 - `fzf`
 - `open`
+
+### `eks-inspect`
+
+Lists all listable Kubernetes resource kinds in the current cluster, including CRDs, through `fzf`, then runs `kubectl inspect` for the selected resource kind.
+
+```nu
+eks-inspect
+```
+
+From Bash, use the alias:
+
+```bash
+kinspect
+```
+
+Dependencies:
+
+- `kubectl`
+- `fzf`
 
 ### `kube-context`
 
