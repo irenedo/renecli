@@ -74,3 +74,40 @@ export def eks-inspect [] {
 
     kubectl inspect $resource
 }
+
+# Pick a pod in the current namespace and follow its logs.
+export def kube-logs [] {
+    let pod = (
+        kubectl get pods --output jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+        | fzf --prompt 'Kubernetes pod> ' --layout reverse --height 40% --border rounded
+        | str trim
+    )
+
+    if ($pod | is-empty) {
+        print 'No Kubernetes pod selected'
+        return
+    }
+
+    kubectl logs -f $pod
+}
+
+# Pick an app.kubernetes.io/name label in the current namespace and follow matching logs.
+export def kube-app-logs [] {
+    let name = (
+        kubectl get pods --output jsonpath='{range .items[*]}{.metadata.labels.app\.kubernetes\.io/name}{"\n"}{end}'
+        | lines
+        | where {|name| not ($name | is-empty) }
+        | sort
+        | uniq
+        | to text
+        | fzf --prompt 'Kubernetes app name> ' --layout reverse --height 40% --border rounded
+        | str trim
+    )
+
+    if ($name | is-empty) {
+        print 'No Kubernetes app name selected'
+        return
+    }
+
+    kubectl logs -f -l $'app.kubernetes.io/name=($name)' --all-containers --max-log-requests=100
+}

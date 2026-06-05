@@ -44,3 +44,5 @@ alias kns='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *;
 alias kcon='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; kube-context"'
 alias king='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; eks-ingress"'
 alias kinspect='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; eks-inspect"'
+alias klogs='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; kube-logs"'
+alias klogsl='__renecli_require_clipath && nu -c "use \"${CLIPATH}/commands.nu\" *; kube-app-logs"'

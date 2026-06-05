@@ -68,26 +68,6 @@ Dependencies:
 
 - `kubectl`
 - `fzf`
-- `kubectl-inspect`
-
-Install `kubectl-inspect` with Go:
-
-```bash
-go install github.com/irenedo/kubectl-inspect@latest
-```
-
-Or with Krew:
-
-```bash
-kubectl krew update
-kubectl krew install inspect
-```
-
-After installation, `kubectl` discovers it automatically as:
-
-```bash
-kubectl inspect deployment
-```
 
 ### `eks-ingress`
 
@@ -128,6 +108,44 @@ Dependencies:
 - `kubectl`
 - `fzf`
 
+### `kube-logs`
+
+Lists pods in the current Kubernetes namespace through `fzf`, then follows logs for the selected pod.
+
+```nu
+kube-logs
+```
+
+From Bash, use the alias:
+
+```bash
+klogs
+```
+
+Dependencies:
+
+- `kubectl`
+- `fzf`
+
+### `kube-app-logs`
+
+Lists unique `app.kubernetes.io/name` label values from pods in the current Kubernetes namespace through `fzf`, then follows logs for pods matching the selected label value.
+
+```nu
+kube-app-logs
+```
+
+From Bash, use the alias:
+
+```bash
+klogsl
+```
+
+Dependencies:
+
+- `kubectl`
+- `fzf`
+
 ### `kube-context`
 
 Lists configured Kubernetes contexts through `fzf`, switches to the selected context, then asks you to select a namespace for that context.
@@ -146,3 +164,26 @@ Dependencies:
 
 - `kubectl`
 - `fzf`
+
+### `kubectl-inspect` Plugin
+
+The `eks-inspect` command requires the `kubectl-inspect` plugin.
+
+Install it with Go:
+
+```bash
+go install github.com/irenedo/kubectl-inspect@latest
+```
+
+Or with Krew:
+
+```bash
+kubectl krew update
+kubectl krew install inspect
+```
+
+After installation, `kubectl` discovers it automatically as:
+
+```bash
+kubectl inspect deployment
+```
